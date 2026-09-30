@@ -19,6 +19,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
           source: "frontend/*"
           target: "/tmp/frontend"
 
@@ -28,7 +29,9 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
           script: |
+            sudo mkdir -p /var/www/html
             sudo rm -rf /var/www/html/*
             sudo cp -r /tmp/frontend/* /var/www/html/
             sudo chown -R www-data:www-data /var/www/html
